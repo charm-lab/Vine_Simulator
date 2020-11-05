@@ -1,4 +1,4 @@
-function W!(g,qv)
+function g!(g,qv)
     links = length(g)
     nq = Int(length(qv)/2)
     q = qv[1:nq]

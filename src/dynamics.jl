@@ -27,15 +27,15 @@ function dynamics(m::Vine,x, u)
     F.= -m.R * m.k * [θall; θdall]
 
     # joint constraints
-    C!(m.c,q)
-    ForwardDiff.jacobian!(J, C!, ones(nc), q)
+    c!(m.c,q)
+    ForwardDiff.jacobian!(J, c!, ones(nc), q)
 
     # contact constraints
-    calcL!(m,q,m.env.objects)
+    calcLΦ!(m,q,m.env.objects)
 
     # growth constraints
-    W!(m.g,x)
-    ForwardDiff.jacobian!(m.G, W!, ones(length(m.g)), x)
+    g!(m.g,x)
+    ForwardDiff.jacobian!(m.G, g!, ones(length(m.g)), x)
 
     # solve convex problem
     vkp1 = solveQP!(m, qd, u)

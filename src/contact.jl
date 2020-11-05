@@ -1,27 +1,27 @@
 include("distances.jl")
 
 # Compute L and Φ in place
-function calcL!(m::Vine, q, objects)
+function calcLΦ!(m::Vine, q, objects)
     L = m.L
     Φ = m.Φ
     for i=1:m.ne
-        calcL!(L, Φ, m, q, objects[i], i)
+        calcLΦ!(L, Φ, m, q, objects[i], i)
     end
     return L, Φ
 end
 
 # Return L and Φ
-function calcL(m::Vine, q, objects)
+function calcLΦ(m::Vine, q, objects)
     L = zeros(eltype(q), m.nΦ*m.ne, m.nq)
     Φ = zeros(eltype(q), m.nΦ*m.ne)
     for i=1:m.ne
-        calcL!(L, Φ, m, q, objects[i], i)
+        calcLΦ!(L, Φ, m, q, objects[i], i)
     end
     return L, Φ
 end
 
 # Compute L and Φ for a circular object
-function calcL!(L_all, Φ_all, m::Vine, q, o::Circ, j::Int)
+function calcLΦ!(L_all, Φ_all, m::Vine, q, o::Circ, j::Int)
     r = m.r
     nΦ = m.nΦ
     Φ = view(Φ_all, (j-1)*nΦ+1:j*nΦ)
@@ -43,7 +43,7 @@ function calcL!(L_all, Φ_all, m::Vine, q, o::Circ, j::Int)
 end
 
 # Compute L and Φ for a rectangle object
-function calcL!(L_all, Φ_all, m::Vine, q, o::Rect, j::Int)
+function calcLΦ!(L_all, Φ_all, m::Vine, q, o::Rect, j::Int)
     r = m.r
     nΦ = m.nΦ
     Φ = view(Φ_all, (j-1)*nΦ+1:j*nΦ)
@@ -63,7 +63,7 @@ function calcL!(L_all, Φ_all, m::Vine, q, o::Rect, j::Int)
 end
 
 # Compute L and Φ for an angled rectangle object
-function calcL!(L_all, Φ_all, m::Vine, q, o::AngledRect, j::Int)
+function calcLΦ!(L_all, Φ_all, m::Vine, q, o::AngledRect, j::Int)
     r = m.r
     nΦ = m.nΦ
     Φ = view(Φ_all,(j-1)*nΦ+1:j*nΦ)

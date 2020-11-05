@@ -14,17 +14,17 @@ function compute_jacobians(m::Vine, x::Vector, u::Vector, stiffness::Number, dam
     # joint constraints
     cq = zeros(eltype(x), m.nc)
     J = zeros(eltype(x), m.nc, m.nq)
-    C!(cq, q)
-    ForwardDiff.jacobian!(J, C!, ones(eltype(q), nc), q)
+    c!(cq, q)
+    ForwardDiff.jacobian!(J, c!, ones(eltype(q), nc), q)
 
     # contact constraints
-    L, Φ = calcL(m,q,m.env.objects)
+    L, Φ = calcLΦ(m,q,m.env.objects)
 
     # growth constraints
     g = zeros(eltype(x), m.nu)
     G = zeros(eltype(x), size(m.G))
-    W!(g,[q;qd])
-    ForwardDiff.jacobian!(G, W!, ones(eltype(q), length(m.g)), [q;qd])
+    g!(g,[q;qd])
+    ForwardDiff.jacobian!(G, g!, ones(eltype(q), length(m.g)), [q;qd])
 
     return J, cq, L, Φ, G, g, F
 end
