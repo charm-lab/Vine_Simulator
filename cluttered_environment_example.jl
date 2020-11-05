@@ -16,8 +16,8 @@ objects = Env([b1 b2 b3 b4 b5 b6])
 
 # Vine model
 links = 25 # number of pairs of bodies
-r = 3.0 # distance from CoM to body end (mm)
-vine = create_vine(links, r, stiffness=30000., damping=10.,
+d = 3.0 # distance from CoM to body end (mm)
+vine = create_vine(links, d, stiffness=30000., damping=10.,
                     m_b=.002, # mass
                     J_b=5, # inertia
                     θ0 = -52 * pi / 180, # initial heading
@@ -32,10 +32,10 @@ nu = vine.nu
 
 # Set initial state
 x = vine.θ0 * ones(nq)
-x[1:2] = [vine.r * cos(vine.θ0); vine.r * sin(vine.θ0)]
+x[1:2] = [vine.d * cos(vine.θ0); vine.d * sin(vine.θ0)]
 for i = 1:nb-1
     x[3*i+1:3*i+2] =
-        (2 * i + 1) * [vine.r * cos(vine.θ0); vine.r * sin(vine.θ0)]
+        (2 * i + 1) * [vine.d * cos(vine.θ0); vine.d * sin(vine.θ0)]
 end
 
 q0 = SVector{nq}(x)

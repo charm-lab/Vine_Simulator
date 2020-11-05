@@ -14,7 +14,6 @@ function dynamics(m::Vine,x, u)
     λ = m.λ
     F = m.Fext
     MI = m.MInv
-    r = m.r
     Δt = m.Δt
     L = m.L
     n = m.n

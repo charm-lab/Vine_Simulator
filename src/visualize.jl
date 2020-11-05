@@ -24,7 +24,7 @@ end
 
 function visualize!(m::Vine,Z,withEnv=true;showIntermediate = false)
     diam = m.diam/1000 # tube diameter
-    r = m.r/1000
+    d = m.d/1000
     links = m.nΦ
     Δt = m.Δt
     N = length(Z[1,:])
@@ -74,15 +74,15 @@ function visualize!(m::Vine,Z,withEnv=true;showIntermediate = false)
                 x1 = Z[6*i-5,k]
                 y1 = Z[6*i-4,k]
                 θ1 = Z[6*i-3,k]
-                X1 = x1 - r*cos(θ1)
-                Y1 = y1 - r*sin(θ1)
+                X1 = x1 - d*cos(θ1)
+                Y1 = y1 - d*sin(θ1)
 
                 # Distal endpoint of link
                 x2 = Z[6*i-2,k]
                 y2 = Z[6*i-1,k]
                 θ2 = Z[6*i,k]
-                X2 = x2 + r*cos(θ2)
-                Y2 = y2 + r*sin(θ2)
+                X2 = x2 + d*cos(θ2)
+                Y2 = y2 + d*sin(θ2)
 
                 # Set point locations
                 settransform!(vis["prox$i"], Translation(X1, Y1, 0))

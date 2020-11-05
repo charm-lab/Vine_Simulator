@@ -17,14 +17,14 @@ end
 
 # input: state vector
 # output: xy vector
-function kinematics(q, r, A)
+function kinematics(q, d, A)
     nq = length(q)
     x = [q[i] for i = 1:3:nq]
     y = [q[i] for i = 2:3:nq]
     θ = [q[i] for i = 3:3:nq]
 
-    x_pin = x + r*cos.(θ)
-    y_pin = y + r*sin.(θ)
+    x_pin = x + d*cos.(θ)
+    y_pin = y + d*sin.(θ)
 
     return A*x_pin, A*y_pin
 end

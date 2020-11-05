@@ -4,8 +4,8 @@ function Φ!(Φ, q)
     x = q[end-2]
     y = q[end-1]
     Θ = q[end]
-    r = vine.r
-    dist, _, _ = distToPoly(vine.env.objects[1].polygon,[x+r*cos(Θ);y+r*sin(Θ)])
+    d = vine.d
+    dist, _, _ = distToPoly(vine.env.objects[1].polygon,[x+d*cos(Θ);y+d*sin(Θ)])
     Φ[1] = dist - vine.diam/2
 end
 

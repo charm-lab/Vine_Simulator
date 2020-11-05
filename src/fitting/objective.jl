@@ -23,7 +23,7 @@ function obj(z)
     cost = 0.0
     for t = 1:T
         if mod(t, 3) == 1
-            xcoords, ycoords = kinematics(q[t], vine.r, A)
+            xcoords, ycoords = kinematics(q[t], vine.d, A)
             cost += αx*(xcoords - x_vid[vid_idx])'*(xcoords - x_vid[vid_idx])
             cost += αy*(ycoords - y_vid[vid_idx])'*(ycoords - y_vid[vid_idx])
             # println((xcoords - x_vid[vid_idx])'*(xcoords - x_vid[vid_idx]))

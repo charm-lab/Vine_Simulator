@@ -5,7 +5,7 @@ include("../src/objects.jl")
 mutable struct Vine{T,S,D,V}
     θ0::T       # initial heading
     diam::T     # tube diameter
-    r::T        # distance from body CoM to body endpoint
+    d::T        # distance from body CoM to body endpoint
     k::S        # stiffness and damping matrix
 
     M::D        # mass matrix
@@ -34,7 +34,7 @@ mutable struct Vine{T,S,D,V}
     env::Env    # list of objects in environment
 end
 
-function create_vine(links, r; stiffness=500000, damping=30,
+function create_vine(links, d; stiffness=500000, damping=30,
                     m_b=.001, # mass
                     J_b=200, # inertia
                     θ0 = 0., # initial heading
@@ -77,5 +77,5 @@ function create_vine(links, r; stiffness=500000, damping=30,
         R[6*i+3,i+1] = 1
     end
 
-    return Vine(θ0,diam,r,k,M,MInv,R,Fext,J,c,λ,L,Φ,n,G,g,w,Δt,nb,nq,nc,nu,ne,nΦ,objects)
+    return Vine(θ0,diam,d,k,M,MInv,R,Fext,J,c,λ,L,Φ,n,G,g,w,Δt,nb,nq,nc,nu,ne,nΦ,objects)
 end

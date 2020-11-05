@@ -21,12 +21,12 @@ M = 2*vine.nq*(T-1) + (vine.nc + 1 + vine.nu)*T # number of constraints
 prob = ProblemIpopt(N, M) # set up optimization problem for Ipopt
 
 # Solve
-z_sol = solve(z0, prob, tol=1., d_tol=1., c_tol=1.0e-3, max_iter = 300)
+z_sol = solve(z0, prob, tol=1., d_tol=1., c_tol=1.0e-3, max_iter = 1)
 
 # Extract trajectory
 Z_sol = reshape(z_sol[1:2*vine.nq*T], 2*vine.nq, T)
-x_kin_sol = [kinematics(Z_sol[1:vine.nq,t], vine.r, A)[1] for t=1:T]
-y_kin_sol = [kinematics(Z_sol[1:vine.nq,t], vine.r, A)[2] for t=1:T]
+x_kin_sol = [kinematics(Z_sol[1:vine.nq,t], vine.d, A)[1] for t=1:T]
+y_kin_sol = [kinematics(Z_sol[1:vine.nq,t], vine.d, A)[2] for t=1:T]
 
 # Compare tip trajectories
 T_vid = length(x_vid)

@@ -13,13 +13,13 @@ function run_sim(links, N=400, growth_rate=40; vis=false)
 
     # Create vine model
     println("Setting up model with $(2*links) rigid bodies...")
-    r = 100/links # link radius in mm
-    vine = create_vine(links, r)
+    d = 100/links # link radius in mm
+    vine = create_vine(links, d)
     nq = vine.nq
 
     # Set starting position
     q = zeros(nq)
-    q[1:3:nq] .= [r*i for i=1:2:2*vine.nb]
+    q[1:3:nq] .= [d*i for i=1:2:2*vine.nb]
 
     # Set initial state
     q = SVector{nq}(q)

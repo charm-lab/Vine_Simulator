@@ -2,8 +2,8 @@ function c!(c,q)
     nc = length(c)
 
     # base pin
-    c[1] = q[1] - vine.r*cos(q[3])
-    c[2] = q[2] - vine.r*sin(q[3])
+    c[1] = q[1] - vine.d*cos(q[3])
+    c[2] = q[2] - vine.d*sin(q[3])
 
     # pin elements
     for i=2:Int(nc/4)
@@ -13,8 +13,8 @@ function c!(c,q)
         x2 = q[6*i-5]
         y2 = q[6*i-4]
         Θ2 = q[6*i-3]
-        c[4*i-3] = x2-x1 - vine.r*(cos(Θ1)+cos(Θ2))
-        c[4*i-2] = y2-y1 - vine.r*(sin(Θ1)+sin(Θ2))
+        c[4*i-3] = x2-x1 - vine.d*(cos(Θ1)+cos(Θ2))
+        c[4*i-2] = y2-y1 - vine.d*(sin(Θ1)+sin(Θ2))
     end
 
     # prismatic elements
